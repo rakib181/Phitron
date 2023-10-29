@@ -1,32 +1,38 @@
 #include<bits/stdc++.h>
 using namespace std;
-#define int long long int
 
 int32_t main(){
-     ios_base::sync_with_stdio(false);
-     cin.tie(nullptr);
-     int tt;
-     cin >> tt;
-    while (tt--){
-       int n;
-       cin >> n;
-       if(n == 3)cout << "-1" << '\n';
-       else{
-           if(n & 1){
-               for(int i = n; i >= n / 2 + 2; i--){
-                   cout << i << ' ';
-               }
-               for(int i = 1; i <= n / 2 + 1; i++){
-                   cout << i << ' ';
-               }
-               cout << '\n';
-           }else{
-               for(int i = 1; i <= n; i += 2){
-                   cout << i + 1 << ' ' << i << ' ';
-               }
-               cout << '\n';
-           }
-       }
+   ios_base::sync_with_stdio(0);
+    cin.tie(0); 
+    #ifndef ONLINE_JUDGE 
+    freopen("input.txt","r",stdin); 
+    freopen("output.txt","w",stdout); 
+    #endif
+    auto start=clock();
+    int tt;
+    cin >> tt;
+    while(tt--){
+      int n, k;
+      cin >> n >> k;
+      map<int, vector<int> > mp;
+      for(int i = 0; i < n; i++){
+        int x;
+        cin >> x;
+        mp[x].push_back(i);
+      }
+      while(k--){
+        int a, b;
+        cin >> a >> b;
+        if (!mp[a].size() || !mp[b].size()){
+          cout << "NO" << '\n';
+        }
+        else if(mp[a][0] < mp[b][mp[b].size() - 1]){
+          cout << "YES" << '\n';
+        }else{
+          cout << "NO" << '\n';
+        } 
+      }
     }
-     return 0;
+    cerr<<1.0 * (clock()-start)/CLOCKS_PER_SEC<<endl;
+    return 0;
 }
